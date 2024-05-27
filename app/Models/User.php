@@ -11,6 +11,9 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public function videos() {
+        return $this->hasMany(Video::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
