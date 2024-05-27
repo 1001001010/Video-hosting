@@ -8,6 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Video extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'user_id',
+        'category_id',
+        'path',
+        'description',
+        'count_like',
+        'count_dislike',
+        'visibility'
+    ];
 
     public function category() {
         return $this->belongsTo(Category::class);

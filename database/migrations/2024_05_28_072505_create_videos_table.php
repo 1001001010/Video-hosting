@@ -20,9 +20,9 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('path');
             $table->string('description');
-            $table->integer('count_like');
-            $table->integer('count_dislike');
-            $table->integer('visibility');
+            $table->integer('count_like')->default(0);
+            $table->integer('count_dislike')->default(0);
+            $table->boolean('visibility')->default(TRUE);
             $table->timestamps();
         });
     }
