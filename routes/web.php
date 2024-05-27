@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\{ProfileController, VideoController};
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [VideoController::class, 'welcome'])->name('welcome');
