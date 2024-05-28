@@ -4,12 +4,12 @@
     <div class="py-12">
         <div class="max-w-9xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div class="p-6 text-gray-900 dark:text-gray-100 flex justify-between flex-wrap">
                     @if (count($videos) == 0)
                         <p>Видео нет</p>
                     @else
                         @foreach ($videos as $video)
-                            <a href="">
+                            <a href="{{ route('watchVideo', ['id' => $video->id]) }}" class="flex pb-6">
                                 <div
                                     class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                                     <video class="w-96">

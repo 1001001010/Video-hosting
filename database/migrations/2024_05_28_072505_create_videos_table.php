@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('description');
             $table->integer('count_like')->default(0);
             $table->integer('count_dislike')->default(0);
-            $table->boolean('visibility')->default(TRUE);
+            $table->string('visibility')->default('unban');
             $table->timestamps();
         });
     }

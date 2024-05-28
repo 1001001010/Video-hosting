@@ -8,7 +8,52 @@
                     Загрузить видео
                 </button>
             </div>
-
+            <div class="p-6 text-gray-900 dark:text-gray-100 flex justify-between flex-wrap">
+                @if (count($user_videos) == 0)
+                    <p>Видео нет</p>
+                @else
+                    @foreach ($user_videos as $video)
+                        @if ($video->visibility == 1)
+                            <a href="{{ route('watchVideo', ['id' => $video->id]) }}" class="flex pb-6">
+                                <div
+                                    class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                    <video class="w-96">
+                                        <source src="{{ asset($video->path) }}" type="video/mp4">
+                                    </video>
+                                    <div class="p-5">
+                                        <h5
+                                            class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                            {{ $video->name }}</h5>
+                                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                                            {{ $video->created_at }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        @else
+                            <a href="{{ route('watchVideo', ['id' => $video->id]) }}" class="flex pb-6">
+                                <div class="bg-">
+                                    <div
+                                        class="max-w-sm bg-gray-500 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                        <video class="w-96">
+                                            <source src="{{ asset($video->path) }}" type="video/mp4">
+                                        </video>
+                                        <div class="p-5">
+                                            <p class="mb-1 font-bold text-black dark:text-gray-400">Скрыт</p>
+                                            <h5
+                                                class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                                {{ $video->name }}</h5>
+                                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                                                {{ $video->created_at }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        @endif
+                    @endforeach
+                @endif
+            </div>
         </div>
     </div>
     <div style="background-color: rgb(0, 0, 0, 0.4);" id="default-modal" tabindex="-1" aria-hidden="true"

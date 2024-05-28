@@ -9,7 +9,10 @@ use Auth;
 class VideoController extends Controller
 {
     public function welcome() {
-        $videos = Video::orderBy('created_at', 'DESC')->get();
+        if (Auth::user() and Auth::user()->is_admin == true)
+            $videos = Video::orderBy('created_at', 'DESC')->get();
+        else
+            $videos = Video::orderBy('created_at', 'DESC')->where('visibility', 1)->get();
         return view('welcome', ['videos' => $videos]);
     }
 
@@ -36,7 +39,23 @@ class VideoController extends Controller
 
     public function dashboard() {
         $categories = Category::get();
-        $user_video = Video::where('user_id', Auth::user()->id);
+        $user_video = Video::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
         return view('dashboard', ['user_videos' => $user_video, 'categories' => $categories]);
+    }
+
+    public function watch_video($id) {
+        $video = Video::with(['user', 'category'])->where('id', $id)->find($id);
+        return view('video', ['video' => $video]);
+    }
+
+    public function ban_video($id) {
+        $video = Video::where('id', $id)->first();
+        if($video) {
+            $ban = ($video->visibility == 1) ? 0 : 1;
+            Video::where('id', $id)->update([
+                'visibility' => $ban
+            ]);
+        }
+        return redirect()->back();
     }
 }
