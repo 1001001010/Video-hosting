@@ -21,6 +21,11 @@
                     <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
                         {{ __('Настройки') }}
                     </x-nav-link>
+                    @if (Auth::user()->is_admin == true)
+                        <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
+                            {{ __('Категории') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -101,7 +106,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                         onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('Выйти') }}
                     </x-responsive-nav-link>
                 </form>
             </div>
