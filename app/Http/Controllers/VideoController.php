@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Video;
-use auth;
+use App\Models\{Video, Category};
+use Auth;
 
 class VideoController extends Controller
 {
@@ -21,7 +21,7 @@ class VideoController extends Controller
         ]);
 
         $name = time(). "." . $request->video_file->extension();
-        $destination = 'public/video';
+        $destination = 'public';
         $path = $request->video_file->storeAs($destination, $name);
         $video = [
             'name' => $request->video_name,
@@ -32,5 +32,11 @@ class VideoController extends Controller
         ];
         Video::create($video);
         return redirect()->back();
+    }
+
+    public function dashboard() {
+        $categories = Category::get();
+        $user_video = Video::where('user_id', Auth::user()->id);
+        return view('dashboard', ['user_videos' => $user_video, 'categories' => $categories]);
     }
 }

@@ -32,10 +32,9 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                 </div>
+
                 <!-- Modal body -->
                 <div class="p-4 md:p-5 space-y-4">
-
-
                     <form class="max-w-md mx-auto" method="POST" action="{{ route('NewVideo') }}"
                         enctype="multipart/form-data">
                         @csrf
@@ -61,8 +60,9 @@
                                 категорию</label>
                             <select id="video_category" name="category_id"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected>Детское </option>
-                                <option value="US">Взрослое</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="relative z-0 w-full mb-5 group">

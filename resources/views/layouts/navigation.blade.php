@@ -22,7 +22,7 @@
                         {{ __('Настройки') }}
                     </x-nav-link>
                     @if (Auth::user()->is_admin == true)
-                        <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
+                        <x-nav-link :href="route('category_list')" :active="request()->routeIs('category_list')">
                             {{ __('Категории') }}
                         </x-nav-link>
                     @endif
