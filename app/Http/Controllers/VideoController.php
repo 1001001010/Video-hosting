@@ -21,12 +21,12 @@ class VideoController extends Controller
         ]);
 
         $name = time(). "." . $request->video_file->extension();
-        $destination = 'public';
+        $destination = 'public/';
         $path = $request->video_file->storeAs($destination, $name);
         $video = [
             'name' => $request->video_name,
             'description' => $request->video_message,
-            'path' => $path,
+            'path' => 'storage/' . $name,
             'category_id' => $request->category_id,
             'user_id' => Auth::user()->id
         ];
