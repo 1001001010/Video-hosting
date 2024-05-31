@@ -13,7 +13,7 @@
                     <p>Видео нет</p>
                 @else
                     @foreach ($user_videos as $video)
-                        @if ($video->visibility == 1)
+                        @if ($video->visibility == 'ban' and Auth::user()->is_admin == false)
                             <a href="{{ route('watchVideo', ['id' => $video->id]) }}" class="flex pb-6">
                                 <div
                                     class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
