@@ -12,7 +12,7 @@ class VideoController extends Controller
         if (Auth::user() and Auth::user()->is_admin == true)
             $videos = Video::orderBy('created_at', 'DESC')->get();
         else
-            $videos = Video::orderBy('created_at', 'DESC')->where('visibility', 1)->get();
+            $videos = Video::orderBy('created_at', 'DESC')->where('visibility', 'unban')->get();
         return view('welcome', ['videos' => $videos]);
     }
 

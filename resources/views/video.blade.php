@@ -25,7 +25,7 @@
                         <h1 class="pb-6 font-semibold text-1xl">{{ $video->description }}</h1>
                         <h1 class="font-semibold">Автор: {{ $video->user->name }}</h1>
 
-                        @if (Auth::user()->is_admin == true)
+                        @if (Auth::user() and Auth::user()->is_admin == true)
                             <a href="{{ route('BanVideo', ['id' => $video->id, 'status' => 'unban']) }}"
                                 class="mt-2 inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white {{ $video->visibility == 'unban' ? 'bg-gray-700 dark:bg-white' : '' }} transition ease-in-out duration-150">Нет
                                 ограничений</a>
