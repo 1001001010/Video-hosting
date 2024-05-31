@@ -48,14 +48,10 @@ class VideoController extends Controller
         return view('video', ['video' => $video]);
     }
 
-    public function ban_video($id) {
+    public function ban_video($id, $status) {
         $video = Video::where('id', $id)->first();
-        if($video) {
-            $ban = ($video->visibility == 1) ? 0 : 1;
-            Video::where('id', $id)->update([
-                'visibility' => $ban
-            ]);
-        }
+        Video::where('id', $id)->update(['visibility' => $status]);
+
         return redirect()->back();
     }
 }

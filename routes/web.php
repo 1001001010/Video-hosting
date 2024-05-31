@@ -18,7 +18,7 @@ Route::controller(App\Http\Controllers\VideoController::class)->group(function (
     Route::get('/dashboard', 'dashboard' )->middleware(['auth'])->name('dashboard');
     Route::post('/new_video', 'new_video' )->name('NewVideo');
     Route::get('/video/{id}', 'watch_video' )->name('watchVideo');
-    Route::get('/video/{id}/ban', 'ban_video' )->name('BanVideo');
+    Route::get('/video/{id}/{status}', 'ban_video' )->name('BanVideo');
 });
 
 Route::controller(App\Http\Controllers\CategoryController::class)->group(function () { 
