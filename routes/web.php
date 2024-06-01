@@ -19,6 +19,8 @@ Route::controller(App\Http\Controllers\VideoController::class)->group(function (
     Route::post('/new_video', 'new_video' )->name('NewVideo');
     Route::get('/video/{id}', 'watch_video' )->name('watchVideo');
     Route::get('/video/{id}/{status}', 'ban_video' )->name('BanVideo');
+    Route::get('/video/{id}/like/{status}', 'like_video' )->name('LikeVideo');
+    Route::get('/video/{id}/newComment', 'new_comment' )->name('NewComment');
 });
 
 Route::controller(App\Http\Controllers\CategoryController::class)->group(function () { 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Video, Category};
+use App\Models\{Video, Category, Like, Comment};
 use Auth;
 
 class VideoController extends Controller
@@ -45,13 +45,47 @@ class VideoController extends Controller
 
     public function watch_video($id) {
         $video = Video::with(['user', 'category'])->where('id', $id)->find($id);
-        return view('video', ['video' => $video]);
+        $like = Like::where('video_id', $id)->where('status', 'like')->get();
+        $dislike = Like::where('video_id', $id)->where('status', 'dislike')->get();
+        $comments = Comment::where('video_id', $id)->get();
+        return view('video', ['video' => $video, 'like' => $like, 'dislike' => $dislike, 'comments' => $comments]);
     }
 
     public function ban_video($id, $status) {
         $video = Video::where('id', $id)->first();
         Video::where('id', $id)->update(['visibility' => $status]);
 
+        return redirect()->back();
+    }
+
+    public function like_video($id, $status) {
+        $user = Auth::user();
+        $like = Like::where('user_id', $user->id)->where('video_id', $id)->first();
+        if ($like) {
+            if ($like->status == $status) {
+                $like->delete();
+            } else {
+                $like->status = $status;
+                $like->save();
+            }
+        } else {
+            $like_info = ([
+                'user_id' => $user->id,
+                'video_id' => $id,
+                'status' => $status,
+            ]);
+            Like::create($like_info);
+        }
+        return redirect()->back();
+
+    }
+    public function new_comment($id, Request $request)
+    {
+        Comment::create([
+            'user_id' => Auth::user()->id,
+            'video_id' => $id,
+            'message' => $request->message
+        ]);
         return redirect()->back();
     }
 }
