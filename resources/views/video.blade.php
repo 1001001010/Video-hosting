@@ -31,8 +31,8 @@
                                 ограничений</a>
                             <a href="{{ route('BanVideo', ['id' => $video->id, 'status' => 'violation']) }}"
                                 class="mt-2 inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white {{ $video->visibility == 'violation' ? 'bg-gray-700 dark:bg-white' : '' }} transition ease-in-out duration-150">Нарушение</a>
-                            <a href="{{ route('BanVideo', ['id' => $video->id, 'status' => 'hadow_ban']) }}"
-                                class="mt-2 inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white {{ $video->visibility == 'hadow_ban' ? 'bg-gray-700 dark:bg-white' : '' }} transition ease-in-out duration-150">Теневой
+                            <a href="{{ route('BanVideo', ['id' => $video->id, 'status' => 'shadow_ban']) }}"
+                                class="mt-2 inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white {{ $video->visibility == 'shadow_ban' ? 'bg-gray-700 dark:bg-white' : '' }} transition ease-in-out duration-150">Теневой
                                 бан</a>
                             <a href="{{ route('BanVideo', ['id' => $video->id, 'status' => 'ban']) }}"
                                 class="mt-2 inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white {{ $video->visibility == 'ban' ? 'bg-gray-700 dark:bg-white' : '' }} transition ease-in-out duration-150">Бан</a>

@@ -9,8 +9,7 @@
                         <p>Видео нет</p>
                     @else
                         @foreach ($videos as $video)
-                            @if ($video->visibility == 'violation' or $video->visibility == 'ban' or $video->visibility == 'hadow_ban')
-                            @else
+                            @if ($video->visibility == 'unban')
                                 <a href="{{ route('watchVideo', ['id' => $video->id]) }}" class="flex pb-6">
                                     <div
                                         class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">

@@ -14,6 +14,12 @@ class User extends Authenticatable
     public function videos() {
         return $this->hasMany(Video::class);
     }
+    public function likes() {
+        return $this->hasMany(Like::class);
+    }
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
