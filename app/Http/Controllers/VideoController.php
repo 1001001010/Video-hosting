@@ -38,23 +38,22 @@ class VideoController extends Controller
     }
 
     public function dashboard() {
-        $categories = Category::get();
-        $user_video = Video::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
-        return view('dashboard', ['user_videos' => $user_video, 'categories' => $categories]);
+        return view('dashboard', [
+            'user_videos' => Video::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get(), 
+            'categories' => Category::get()]);
     }
 
     public function watch_video($id) {
-        $video = Video::with(['user', 'category'])->where('id', $id)->find($id);
-        $like = Like::where('video_id', $id)->where('status', 'like')->get();
-        $dislike = Like::where('video_id', $id)->where('status', 'dislike')->get();
-        $comments = Comment::where('video_id', $id)->get();
-        return view('video', ['video' => $video, 'like' => $like, 'dislike' => $dislike, 'comments' => $comments]);
+        return view('video', [
+            'video' => Video::with(['user', 'category'])->where('id', $id)->find($id),
+            'like' => Like::where('video_id', $id)->where('status', 'like')->get(),
+            'dislike' => Like::where('video_id', $id)->where('status', 'dislike')->get(),
+            'comments' => Comment::with(['video', 'user'])->where('video_id', $id)->orderBy('created_at', 'DESC')->get()]);
     }
 
     public function ban_video($id, $status) {
         $video = Video::where('id', $id)->first();
         Video::where('id', $id)->update(['visibility' => $status]);
-
         return redirect()->back();
     }
 
