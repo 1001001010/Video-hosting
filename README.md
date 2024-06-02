@@ -15,7 +15,7 @@
 >*Файл .env* <br> - Отредактировать файл конфигурации
 - Создать ключ приложения `php artisan key:generate`
 - Мигрировать таблицы `php artisan migrate`
-- Создание админу `php artisan db:seed`
+- Создание админа `php artisan db:seed`
 - Создать хранилище `php artisan storage:link`
 - Запустить приложения `npm run dev` и `php artisan serve`
 ---
